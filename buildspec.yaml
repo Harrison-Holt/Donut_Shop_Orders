@@ -8,7 +8,7 @@ phases:
       - echo "Installing dependencies..."
       - cd lambdas/order_validation && npm install
       - cd ../updating_donut_inventory && npm install
-      - cd ../calculate_order_wait_time && npm install
+      - cd ../calculate_order_wait_time && npm install && cd ..
 
   build:
     commands:
