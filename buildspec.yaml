@@ -10,19 +10,18 @@ phases:
       - cd ../updating_donut_inventory && npm install
       - cd ../calculate_order_wait_time && npm install
 
-  build:
-    commands:
-      - echo "Zipping Lambda functions..."
-      - cd lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json
-      - cd ../updating_donut_inventory && zip -r updating_donut_inventory.zip index.js node_modules package.json
-      - cd ../calculate_order_wait_time && zip -r calculate_order_wait_time.zip index.js node_modules package.json
+build:
+  commands:
+    - echo "Zipping Lambda functions..."
+    - zip -r lambdas/order_validation/order_validation.zip lambdas/order_validation/index.js lambdas/order_validation/node_modules lambdas/order_validation/package.json
+    - zip -r lambdas/updating_donut_inventory/updating_donut_inventory.zip lambdas/updating_donut_inventory/index.js lambdas/updating_donut_inventory/node_modules lambdas/updating_donut_inventory/package.json
+    - zip -r lambdas/calculate_order_wait_time/calculate_order_wait_time.zip lambdas/calculate_order_wait_time/index.js lambdas/calculate_order_wait_time/node_modules lambdas/calculate_order_wait_time/package.json
 
-  post_build:
-    commands:
-      - echo "Checking if ZIP files exist..."
-      - ls -R lambdas/  
-
-      - echo "Deploying Lambda functions..."
-      - aws lambda update-function-code --function-name order_validation --zip-file fileb://lambdas/order_validation/order_validation.zip
-      - aws lambda update-function-code --function-name updating_donut_inventory --zip-file fileb://lambdas/updating_donut_inventory/updating_donut_inventory.zip
-      - aws lambda update-function-code --function-name calculate_order_wait_time --zip-file fileb://lambdas/calculate_order_wait_time/calculate_order_wait_time.zip
+post_build:
+  commands:
+    - echo "listing Lambda functions..."
+    - ls -R lambdas/  
+    - echo "Deploying Lambda functions..."
+    - aws lambda update-function-code --function-name order_validation --zip-file fileb://lambdas/order_validation/order_validation.zip
+    - aws lambda update-function-code --function-name updating_donut_inventory --zip-file fileb://lambdas/updating_donut_inventory/updating_donut_inventory.zip
+    - aws lambda update-function-code --function-name calculate_order_wait_time --zip-file fileb://lambdas/calculate_order_wait_time/calculate_order_wait_time.zip
