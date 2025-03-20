@@ -11,9 +11,9 @@ phases:
       - cd ../calculate_order_wait_time && npm install
 
   build:
-  commands:
-    - echo "Zipping Lambda functions..."
-    - cd ./AWS_CL_SDK/lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
+    commands:
+      - echo "Zipping Lambda functions..."
+      - cd ./AWS_CL_SDK/lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
 
   post_build:
     commands:
