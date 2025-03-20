@@ -8,10 +8,14 @@ phases:
       - echo "Installing dependencies..."
       - cd lambdas/order_validation && npm install
       - cd ../updating_donut_inventory && npm install
-      - cd ../calculate_order_wait_time && npm install && cd ..
+      - cd ../calculate_order_wait_time && npm install
 
   build:
     commands:
+      - echo "Ensuring we are in the correct directory..."
+      - pwd  # Print current directory for debugging
+      - ls -R  # Show all files for debugging
+      - cd $(pwd)  # Ensures it stays in the correct directory
       - echo "Zipping Lambda functions..."
       - cd lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
       - cd ../updating_donut_inventory && zip -r updating_donut_inventory.zip index.js node_modules package.json && mv updating_donut_inventory.zip ../../
