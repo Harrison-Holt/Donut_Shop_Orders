@@ -17,7 +17,7 @@ phases:
       - echo "Listing all files:"
       - ls -R  # List all files recursively to verify folder structures
       - echo "Zipping Lambda functions..."
-      - cd lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
+      - cd ./lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
       - cd ../updating_donut_inventory && zip -r updating_donut_inventory.zip index.js node_modules package.json && mv updating_donut_inventory.zip ../../
       - cd ../calculate_order_wait_time && zip -r calculate_order_wait_time.zip index.js node_modules package.json && mv calculate_order_wait_time.zip ../../
 
