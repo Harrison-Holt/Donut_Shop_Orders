@@ -12,10 +12,10 @@ phases:
 
   build:
     commands:
-      - echo "Ensuring we are in the correct directory..."
-      - pwd  # Print current directory for debugging
-      - ls -R  # Show all files for debugging
-      - cd $(pwd)  # Ensures it stays in the correct directory
+      - echo "Current directory:"
+      - pwd  # Print current directory
+      - echo "Listing all files:"
+      - ls -R  # List all files recursively to verify folder structure
       - echo "Zipping Lambda functions..."
       - cd lambdas/order_validation && zip -r order_validation.zip index.js node_modules package.json && mv order_validation.zip ../../
       - cd ../updating_donut_inventory && zip -r updating_donut_inventory.zip index.js node_modules package.json && mv updating_donut_inventory.zip ../../
