@@ -4,6 +4,8 @@ const event_bridge = new EventBridgeClient({ region: 'us-east-1' });
 
 export const handler = async(event) => {
 
+    console.log("New Version!. Testing Pipeline!"); 
+    
     console.log("Received event: ", event); 
 
     try {
