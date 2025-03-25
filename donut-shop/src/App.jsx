@@ -17,6 +17,7 @@ import {
   Box,
   TextField,
   CardMedia,
+  Alert
 } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 
@@ -32,7 +33,7 @@ const theme = createTheme({
       main: "#F7C59F",
     },
     info: {
-      main: "#FADADD", // Strawberry Cream
+      main: "#FADADD",
     },
   },
   typography: {
@@ -111,12 +112,31 @@ const MenuPage = ({ quantities, setQuantities }) => {
 };
 
 const CartPage = ({ quantities }) => {
-  const totalDonuts = quantities.reduce((sum, qty) => sum + qty, 0);
-  const dozens = Math.floor(totalDonuts / 12);
-  const remainder = totalDonuts % 12;
-  const totalCost = dozens * 12 + remainder * 1.5;
-  const tax = +(totalCost * 0.1275).toFixed(2);
-  const grandTotal = +(totalCost + tax).toFixed(2);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async () => {
+    const selectedDonuts = donuts
+      .map((d, i) => ({ type: d.name.replace(/ /g, '_').toLowerCase(), qty: quantities[i] }))
+      .filter(d => d.qty > 0);
+
+    const donut_type = selectedDonuts.map(d => d.type);
+    const quantity = selectedDonuts.map(d => d.qty);
+
+    const res = await fetch("https://mamjw5yigj.execute-api.us-east-1.amazonaws.com/dev/insert_new_order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        donut_type,
+        quantity,
+        customerName: name,
+        customerEmail: email
+      })
+    });
+
+    if (res.ok) setSubmitted(true);
+  };
 
   return (
     <Container sx={{ minHeight: "100vh" }}>
@@ -130,38 +150,24 @@ const CartPage = ({ quantities }) => {
           )
         ))}
       </Box>
-      <Box sx={{ mb: 2 }}>
-        <Typography>Subtotal: ${totalCost.toFixed(2)}</Typography>
-        <Typography>Tax: ${tax}</Typography>
-        <Typography fontWeight="bold">Total: ${grandTotal}</Typography>
-      </Box>
 
-      <Typography variant="h6" sx={{ mt: 4 }}>Payment Info</Typography>
+      <Typography variant="h6" sx={{ mt: 4 }}>Customer Info</Typography>
       <Grid container spacing={2} sx={{ mt: 1 }}>
-      <Grid item xs={12} md={6}>
-          <TextField fullWidth label="Full Name" variant="outlined" />
+        <Grid item xs={12} md={6}>
+          <TextField fullWidth label="Full Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField fullWidth label="Email" variant="outlined" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField fullWidth label="Card Number" variant="outlined" />
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <TextField fullWidth label="Expiration" placeholder="MM/YY" variant="outlined" />
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <TextField fullWidth label="CVV" variant="outlined" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField fullWidth label="Area Code" variant="outlined" />
+          <TextField fullWidth label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Grid>
       </Grid>
 
       <Box sx={{ textAlign: "center", mt: 4 }}>
-        <Button variant="contained" color="primary">
-          Place Order
+        <Button variant="contained" color="primary" onClick={handleSubmit} disabled={!name || !email || submitted}>
+          {submitted ? "Order Submitted" : "Place Order"}
         </Button>
+        <Typography sx={{ mt: 2 }} color="text.secondary">
+          💡 Payment will be collected upon pickup.
+        </Typography>
       </Box>
     </Container>
   );
