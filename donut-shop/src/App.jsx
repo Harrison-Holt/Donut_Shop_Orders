@@ -55,7 +55,7 @@ const donuts = [
   { name: "Cinnamon Sugar Twist", image: "/cinnamon.png" },
   { name: "Cookies & Cream", image: "/cookies.png" },
   { name: "Vanilla Bean Cloud", image: "/vanilla.png" },
-  { name: "S’mores Explosion", image: "/smores.png" },
+  { name: "Smores Explosion", image: "/smores.png" },
   { name: "Matcha Mellow", image: "/matcha.png" },
 ];
 
