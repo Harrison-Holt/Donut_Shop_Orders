@@ -36,13 +36,18 @@ A fully serverless donut ordering platform built on AWS to showcase event-driven
 - CloudWatch – logging and monitoring
 - CloudFormation – infrastructure provisioning
 
-## 📁 Folder Structure
-
-donut-order-system/ ├── frontend/ # React + Vite app ├── lambdas/ # Backend Lambda functions ├── step-functions/ # ASL workflow definitions ├── cicd/ # CodePipeline & CodeBuild configs ├── infra/ # CloudFormation templates └── README.md
-
-markdown
+<details> <summary><code>donut-order-system/</code></summary>
+perl
 Copy
 Edit
+donut-order-system/
+├── frontend/         # React + Vite app
+├── lambdas/          # Backend Lambda functions
+├── step-functions/   # ASL workflow definitions
+├── cicd/             # CodePipeline & CodeBuild configs
+├── infra/            # CloudFormation templates
+└── README.md         # Project documentation
+</details>
 
 ## 📚 Learning Outcomes
 - Built a full serverless app using AWS best practices
