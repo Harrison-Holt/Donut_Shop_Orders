@@ -52,6 +52,34 @@ donut-order-system/
 - Implemented DevOps pipelines for containerized deployment
 - Applied monitoring and alerting via CloudWatch
 
+
+## 🔧 In Progress Enhancements (April 2025)
+
+These features are currently being developed to expand the functionality, monitoring, and security of the Donut Order System.
+
+### 🔒 Cognito Authentication + Order History
+- Integrating **Amazon Cognito** for secure user sign-up and sign-in
+- Protecting API Gateway endpoints using JWT-based authorizers
+- Storing and displaying **order history by user** using DynamoDB and RDS
+- Personalizing receipt access with Cognito-authenticated pre-signed URLs
+
+### 🧪 CI/CD Pipeline Testing Integration
+- Adding **unit tests** for Lambda functions using Jest
+- Configuring **GitHub Actions** to run tests on every push
+- Incorporating **Pa11y** and **Lighthouse CI** to audit accessibility and performance
+- Storing test and audit reports as build artifacts for visibility
+
+### 📈 CloudWatch Dashboard + Alerting
+- Creating a **CloudWatch Dashboard** to monitor:
+  - Lambda errors, invocations, and duration metrics
+  - Step Function execution state and error rates
+  - API Gateway latency and 4XX/5XX responses
+- Setting up **CloudWatch Alarms + SNS alerts** for:
+  - High order failure rates
+  - Unusual error spikes across the application
+
+Stay tuned for updates as these features roll out!
+
 ## 🧑‍💻 Author
 
 **Harrison Holt**  
