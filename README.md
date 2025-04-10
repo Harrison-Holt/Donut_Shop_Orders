@@ -37,9 +37,6 @@ A fully serverless donut ordering platform built on AWS to showcase event-driven
 - CloudFormation – infrastructure provisioning
 
 <details> <summary><code>donut-order-system/</code></summary>
-perl
-Copy
-Edit
 donut-order-system/
 ├── frontend/         # React + Vite app
 ├── lambdas/          # Backend Lambda functions
